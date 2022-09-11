@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container" style="width:80%">
+    <div style="margin-bottom: 10px" class="clearfix">
+
+      <form id="formAdd">
+        <div class="clearfix">
+          {% for field in form %}
+          <div class="col-xs-6">
+            <div
+              class="form-group"
+              style="position: relative; margin-bottom: 20px"
+            >
+              <label>{{ field.label }}</label>
+              {{ field }}
+              <span
+                class="error-msg"
+                style="color: red; position: absolute"
+              ></span>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="col-xs-12">
+            <button id="btnAdd" type="button" class="btn btn-primary" style="margin-bottom:20px; float:right">
+              提 交
+            </button>
+          </div>
+        </div>
+      </form>
+
+
+    <div class="panel panel-default ">
+
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            库存列表
+        </div>
+        <!-- Table -->
+        <table class="table table-striped " >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>库存报警</th>
+                <th>在线报警</th>
+                <th>可持续天数</th>
+                <th>通用件</th>
+                <th>识别码</th>
+                <th>零件代号</th>
+                <th>零件名称</th>
+                <th>工厂代码</th>
+                <th>供应商代码</th>
+                <th>供应商名称</th>
+                <th>筹措员</th>
+                <th>三方物流代码</th>
+                <th>三方物流名称</th>
+                <th>3PL库存</th>
+                <th>在线需求</th>
+                <th>MAX日需求</th>
+                <th>Day1</th>
+                <th>Day2</th>
+                <th>Day3</th>
+                <th>Day4</th>
+                <th>Day5</th>
+                <th>Day6</th>
+                <th>Day7</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in queryset %}
+            <tr>
+                <td>{{ obj.id}}</td>
+                <td>{{ obj.store_warning}}</td>
+                <td>{{ obj.online_warning}}</td>
+                <td>{{ obj.days_store}}</td>
+                <td>{{ obj.part_universal}}</td>
+                <td>{{ obj.identify_code}}</td>
+                <td>{{ obj.part_code }}</td>
+                <td>{{ obj.part_name }}</td>
+                <td>{{ obj.plant_code }}</td>
+                <td>{{ obj.supply_code }}</td>
+                <td>{{ obj.supply_name }}</td>
+                <td>{{ obj.person_purchase }}</td>
+                <td>{{ obj.tpl_code }}</td>
+                <td>{{ obj.tpl_name }}</td>
+                <td>{{ obj.tpl_number }}</td>
+                <td>{{ obj.online_stock }}</td>
+                <td>{{ obj.require_max }}</td>
+                <td>{{ obj.require_one }}</td>
+                <td>{{ obj.require_two }}</td>
+                <td>{{ obj.require_three }}</td>
+                <td>{{ obj.require_four }}</td>
+                <td>{{ obj.require_five }}</td>
+                <td>{{ obj.require_six }}</td>
+                <td>{{ obj.require_seven }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <ul class="pagination">
+        {{ page_string }}
+    </ul>
+</div>
+{% endblock %}

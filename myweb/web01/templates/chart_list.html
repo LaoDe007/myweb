@@ -1,0 +1,151 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">图表分析</div>
+      <div class="panel-body">
+    <div id="m1" style="width: 100%;height: 300px"></div>
+  </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">折线图</div>
+                    <div class="panel-body">
+                        <div id="m2" style="width: 100%;height: 400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+      var myChart2 = echarts.init(document.getElementById('m2'));
+
+      // 指定图表的配置项和数据
+            var option2 = {
+        title: {
+          text: '零件可持续天数统计表',
+          left: 'center'
+        },
+        tooltip: {
+        trigger: 'axis'
+        },
+          toolbox: {
+                    feature: {
+                      saveAsImage: {},
+                      dataView: {},
+                      title: true,
+                    }
+                  },
+          grid: {
+                    containLabel: true
+                  },
+        legend: {
+          data: ['可持续天数'],
+          bottom: 0
+        },
+        xAxis: {
+          type: 'category',
+          data: ['5QD 959 801', '5QD 959 802', '19G 955 023', '19G 955 405 B  03C', '19G 955 406 B  03C',
+          '8YG 955 023 A', '8YG 955 405', '8YG 955 406', '2QD 959 405', '2QD 959 406', '2QY 959 407 A',
+           '2QY 959 408 A',],
+          nameTextStyle: {
+          }
+        },
+
+        yAxis: {},
+        axisLabel:{
+             formatter: function (value, index) {
+                  if(value.length>10){
+                    return value.substr(0,5)+'...'
+                  }else{
+                    return value
+                  }
+              }
+            },
+            series: [
+          {
+            itemStyle : { normal: {label : {show: true}}},
+            name: '需求',
+            type: 'line',
+            data:['5.278','6.111','3.295','2.081','2.081','2.014','2.115','2.115','4.415','4.189','3.995','4.425'],
+          },
+        ],
+
+            };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart2.setOption(option2);
+
+
+
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('m1'));
+
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: '零件数量表',
+          left: 'center'
+        },
+        tooltip: {
+        trigger: 'axis'
+        },
+          toolbox: {
+                    feature: {
+                      saveAsImage: {},
+                      dataView: {},
+                      title: true,
+                    }
+                  },
+          grid: {
+                    containLabel: true
+                  },
+        legend: {
+          data: ['库存', '需求'],
+          bottom: 0
+        },
+        xAxis: {
+          type: 'category',
+          data: ['5QD 959 801', '5QD 959 802', '19G 955 023', '19G 955 405 B  03C', '19G 955 406 B  03C',
+          '8YG 955 023 A', '8YG 955 405', '8YG 955 406', '2QD 959 405', '2QD 959 406', '2QY 959 407 A',
+           '2QY 959 408 A',],
+          nameTextStyle: {
+          }
+        },
+
+        yAxis: {},
+        axisLabel:{
+             formatter: function (value, index) {
+                  if(value.length>10){
+                    return value.substr(0,5)+'...'
+                  }else{
+                    return value
+                  }
+              }
+            },
+        series: [
+          {
+            name: '需求',
+            type: 'bar',
+            data: ['72','72','865','865','865','417','417','417','106','106','865','865']
+          },
+          {
+            name: '库存',
+            type: 'bar',
+            data: ['380','440','2850','1800','1800','840','882','882','468','444','3456','3828']
+          }
+
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+
+    </script>
+{% endblock %}
